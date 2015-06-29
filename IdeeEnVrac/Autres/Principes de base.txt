@@ -1,0 +1,41 @@
+J'ai assez peu compris finalement à qui s'adressait ce jeu.
+
+Tom a dit qu'avant tout c'était un jeu "pour NS", mais en même temps il a mis sur la table
+ des idées telles que "si pendant une ecobalade vous voyez tel animal vous aurez alors plus 
+ de chances de le croiser ingame".
+ 
+Du coup je (re)pose la question, à qui s'adresse ce jeu ?
+ 
+En fonction de la cible on pourra mieux évaluer le niveau de maturité qu'on veut que le jeu
+ nous renvoie.
+ 
+Quelle que soit la réponse à cette première question, il y a certaines choses que je pense
+ que l'on devrait retrouver et d'autres pas à savoir que :
+ 
+1) Il faut retirer un certain nombre de composants qui donnent au jeu un aspect trop RP à
+ savoir :
+	- Le système de stats
+	- La possibilité d'avoir un inventaire
+	- Le fait de pouvoir se déplacer librement entre des maps
+	- (Et du coup) Le système de rencontre avec des animaux
+	
+Je dirais qu'il faut penser la chose simple, et de ne pas ajouter les lourdeurs de ce type de
+ jeux, auquelles tout le monde ne vas pas adhérer.
+ 
+ 
+2) Il faut pouvoir jouer de façon sporadique sans pour autant avoir le sentiment de perdre
+ le fil de l'histoire.
+
+A cet égard, j'imagine bien un jeu avec des niveaux en mode arcade.
+ (Ce ne doit pas forcément être QUE ça)
+ 
+ 
+3) Il faut penser le jeu pour qu'il soit rapidement et simplement compréhensible par tous.
+
+Qu'il soit tout autant ludique qu'éducatif, sans être lourd sur la partie éducative.
+
+
+J'ai conscience que tout cela s'éloigne radicalement du jeu que nous a présenté Tom, mais
+ cela n'est que mon avis, j'irais dans le sens de la majorité :)
+ 
+David *
