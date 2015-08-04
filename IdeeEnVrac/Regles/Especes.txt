@@ -1,0 +1,25 @@
+Guêpe : Attaque
+Abeille : soins
+Faucon : Attaque
+rouge-gorge: Vol 1 carte en main
+Laitue: nourri (soins)
+Christe-Marine: Stocke les actions
+Immortel des dunes: Régénération
+Lézard des murailles: Rénénération
+Mante religieuse: Attaque
+Figuier: soigne
+Goéland: attaque
+Cormoran: Attaque
+Agave d'Amérique : Ajoute Attaque
+Asperge sauvage : soins
+Pin d'alep: Attaque
+Criquet : Attaque
+Criquet egyptien : Attaque
+Cigale: -1 en Action
+Choucas des tours : Vol une carte posée
+Évax pygmée: -1 At
+Pavot: Supprime une carte
+Scaurus des ruines: Attaque  + Immunité au pouvoir
+Scorpion à pattes jaunes : Attaque sa mère
+Scolopendre ceinturée: + Action
+Tichodrome échelette: Picoher des cartes

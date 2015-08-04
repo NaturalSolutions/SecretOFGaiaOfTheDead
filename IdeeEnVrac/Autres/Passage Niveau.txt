@@ -1,0 +1,9 @@
+- Augmenter points de vie
+- par 10 nivea=> valeur de cartes
+- par 5 niveau => choix d'un pouvoir
+
+
+Choix:
+- PV
+- Taille du deck
+- 

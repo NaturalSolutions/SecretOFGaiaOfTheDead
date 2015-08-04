@@ -1,0 +1,11 @@
+Attaque
+Soin
+Bonus/malus
+Niveau/Nb action
+
+Bonus/malus: Regeneration, Action en plus, At en plus, supprimer/voler des cartes, Poison (perte PV)
+Carte sup.
+
+
+
+

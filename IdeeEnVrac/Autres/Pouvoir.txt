@@ -1,0 +1,16 @@
+Augmenter la taille du pool de cartes posées
+Augemnter le niveau du Deck
+Augmenter la taille de la main
+Choisir les cartes tirées
+Fusionner les cartes (Permanent temporaire)
+Augmenter les point de vie
+Augmenter le nombre de plantes sur une carte
+Choisir les cartes de la main initiale
+Augmenter la taille de la main initiale
+Conserver des actions
+Pouvoir de Gaïa
+Double Xp
+Carte posée au départ
+
+
+
