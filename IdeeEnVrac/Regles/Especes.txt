@@ -1,6 +1,6 @@
 Guêpe : Attaque
 Abeille : soins
-Faucon : Attaque
+Faucon pélerin: Attaque illimité
 rouge-gorge: Vol 1 carte en main
 Laitue: nourri (soins)
 Christe-Marine: Stocke les actions
@@ -22,6 +22,7 @@ Pavot: Supprime une carte
 Scaurus des ruines: Attaque  + Immunité au pouvoir
 Scorpion à pattes jaunes : Attaque sa mère
 Scolopendre ceinturée: + Action
+Séneçon cinéraire: Protège une carte
 Moineau domestique: regarder des cartes
 Tichodrome échelette: Picoher des cartes
 Egilope à inflorescence ovale: Soins
@@ -34,4 +35,6 @@ Hélicette ponctuée: absrobe les prochains dégats
 Phyllodactyle d'Europe: Vol prochaine carte jouée par adversaire
 Punaise: Pioche une carte par pt attaque prochaine attaque
 Nerprun:Pioche une carte par attaque subie
-
+Busard des roseaux: Attaque 
+Faucon crécerelle: Attaque
+Grande ortie: Soins Illimité
