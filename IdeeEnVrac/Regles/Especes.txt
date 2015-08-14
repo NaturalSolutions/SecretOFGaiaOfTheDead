@@ -22,4 +22,16 @@ Pavot: Supprime une carte
 Scaurus des ruines: Attaque  + Immunité au pouvoir
 Scorpion à pattes jaunes : Attaque sa mère
 Scolopendre ceinturée: + Action
+Moineau domestique: regarder des cartes
 Tichodrome échelette: Picoher des cartes
+Egilope à inflorescence ovale: Soins
+Lapin de garenne: Stocke des actions
+Moineau domestique: voir une carte
+Monticole merle-bleu: voir cartes posée
+Phagnalon des rochers:  protège une carte du vol
+Laiteron glauque: renvoie les dégâts absorbé
+Hélicette ponctuée: absrobe les prochains dégats
+Phyllodactyle d'Europe: Vol prochaine carte jouée par adversaire
+Punaise: Pioche une carte par pt attaque prochaine attaque
+Nerprun:Pioche une carte par attaque subie
+
