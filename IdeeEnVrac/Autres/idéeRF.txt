@@ -1,0 +1,6 @@
+- ajouter des pubs et proposer d'en visionner
+- l'utilisateur gagne des credits "Verts" en accedant au pubs
+- proposer une liste d'ONG pour la conservation et la protection de la biodiversité ( 3 ou 4 , ex : WWF , etc) à laquelle l'utilisateur peut inscire ses credits en tant que don
+- la totalité du revenu généré par les pubs sera distribuée à ces ONG en fonctions du ratio credits totaux/ONG choisies
+
+===> hélas ne rapporte rien financièrement à la boite mais beaucoup en notoriété ! 
