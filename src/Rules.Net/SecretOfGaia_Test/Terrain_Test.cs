@@ -5,20 +5,20 @@ using SecretOfGaia;
 namespace SecretOfGaia_Test
 {
     [TestClass]
-    public class PoseJoueur_Test
+    public class Terrain_Test
     {
         [TestMethod]
-        public void TestCreationPoseJoueur()
+        public void TestCreationTerrain()
         {
-            PoseJoueur curPose = new PoseJoueur(1);
+            Terrain curPose = new Terrain(1);
             Assert.AreEqual(1, curPose.taille);
-            Assert.AreEqual(0, curPose.Count,"Consctruteur PoseJoueur COunt NOK");
+            Assert.AreEqual(0, curPose.Count,"Consctruteur Terrain COunt NOK");
         }
 
         [TestMethod]
         public void TestAjoutCarteEnTrop()
         {
-            PoseJoueur curPose = new PoseJoueur(2);
+            Terrain curPose = new Terrain(2);
             Carte maCarte1 = new Carte("Carte1", TypeCarte.Instantanee, 1, 1, 12);
             bool AjoutOK =  curPose.ajouterCarte(maCarte1);
             Carte maCarte2 = new Carte("Carte2", TypeCarte.Instantanee, 1, 1, 7);
@@ -36,7 +36,7 @@ namespace SecretOfGaia_Test
         [TestMethod]
         public void TestAjoutCarteSuperposée()
         {
-            PoseJoueur curPose = new PoseJoueur(2);
+            Terrain curPose = new Terrain(2);
             Carte maCarte1 = new Carte("Carte1", TypeCarte.Instantanee, 1, 1, 12);
             bool AjoutOK = curPose.ajouterCarte(maCarte1);
             Carte maCarte2 = new Carte("Carte2", TypeCarte.Instantanee, 1, 1, 7);
@@ -50,7 +50,7 @@ namespace SecretOfGaia_Test
         [TestMethod]
         public void TestElenverCarteSuperposée()
         {
-            PoseJoueur curPose = new PoseJoueur(2);
+            Terrain curPose = new Terrain(2);
             Carte maCarte1 = new Carte("Carte1", TypeCarte.Instantanee, 1, 1, 12);
             bool AjoutOK = curPose.ajouterCarte(maCarte1);
             Carte maCarte2 = new Carte("Carte2", TypeCarte.Instantanee, 1, 1, 7);
@@ -63,7 +63,7 @@ namespace SecretOfGaia_Test
         [TestMethod]
         public void TestElenverCarteduDessousAvecSuperposition()
         {
-            PoseJoueur curPose = new PoseJoueur(2);
+            Terrain curPose = new Terrain(2);
             Carte maCarte1 = new Carte("Carte1", TypeCarte.Instantanee, 1, 1, 12);
             bool AjoutOK = curPose.ajouterCarte(maCarte1);
             Carte maCarte2 = new Carte("Carte2", TypeCarte.Instantanee, 1, 1, 7);

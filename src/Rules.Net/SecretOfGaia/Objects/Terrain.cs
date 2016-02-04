@@ -8,7 +8,7 @@ namespace SecretOfGaia
     /// <summary>
     /// 
     /// </summary>
-    public class PoseJoueur : InventaireDeCarte
+    public class Terrain : InventaireDeCarte
     {
 
 
@@ -65,7 +65,7 @@ namespace SecretOfGaia
         #endregion
 
         #region "Constructeurs"
-        public PoseJoueur(int curTaille)
+        public Terrain(int curTaille)
         {
             _taille = curTaille;
             _cartesSupreposées = new Dictionary<int, List<Carte>>();
