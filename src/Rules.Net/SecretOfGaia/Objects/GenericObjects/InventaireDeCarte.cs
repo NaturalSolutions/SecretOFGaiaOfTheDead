@@ -11,9 +11,8 @@ namespace SecretOfGaia
     public abstract class InventaireDeCarte
     {
 
-
         #region "Propriétés privées"
-        protected List<Carte> _cartes;
+        protected Dictionary<int,Carte> _cartes;
         #endregion
 
 
@@ -28,6 +27,7 @@ namespace SecretOfGaia
         /// </summary>
         public InventaireDeCarte()
         {
+            _cartes = new Dictionary<int, Carte>();
         }
         #endregion
 
@@ -39,14 +39,22 @@ namespace SecretOfGaia
 
         #region "Méthode publiques"
 
+        public int Count
+        {
+            get
+            {
+                return _cartes.Count;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="NumCarte"></param>
         /// <returns></returns>
-        public Carte this[int NumCarte] {
+        public virtual Carte this[int position] {
             get {
-                return _cartes[NumCarte] ;
+                return _cartes[position] ;
             }
         }
 
@@ -59,20 +67,70 @@ namespace SecretOfGaia
         {
             get
             {
-                return _cartes.Where(s=>s.Nom.ToLower() == NomCarte.ToLower()).FirstOrDefault() ;
+                return _cartes.Select(s=>s.Value).Where(s=>s.nom.ToLower() == NomCarte.ToLower()).FirstOrDefault() ;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public Carte ProchaineCarte
+        public Carte prochaineCarte
         {
             get
             {
-                return this._cartes[0];
+                if (_cartes.Count == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    return this._cartes[this._cartes.Keys.Min()];
+                }
             }
         }
+
+        public virtual bool ajouterCarte(Carte curcarte)
+        {
+            _cartes.Add(_cartes.Keys.DefaultIfEmpty(0).Max() + 1, curcarte);
+            return true;
+        }
+
+        public virtual bool ajouterCarte(Carte curcarte,int position = - 1,bool remplaceExistante = true)
+        {
+            if (position == -1)
+            {
+                position = _cartes.Keys.DefaultIfEmpty(0).Max() + 1 ;
+            }
+            if (_cartes.ContainsKey(position))
+            {
+                if (remplaceExistante)
+                {
+                    _cartes.Remove(position);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            _cartes.Add(position, curcarte);
+            return true;
+        }
+
+
+        public virtual bool enleverCarte(int position)
+        {
+            if (_cartes.ContainsKey(position))
+            {
+                _cartes.Remove(position);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
         #endregion
 
     }

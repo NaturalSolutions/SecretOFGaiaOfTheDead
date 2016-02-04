@@ -12,7 +12,11 @@ Secret Of Gaïa for the Dead
 ##coding rule
 	- Create an object from Templates directory
 	- Add Meta-Comment on each object/method/property
-	- One file page object (enum can be in the file corresponding to th object using it)
-	- code in FGrench(to avoid reserved word in languages)
-	- private/protected elements should start with "_"
+	- Only one object per file (enum can be in the file corresponding to the object using it)
+	- Code in French (to avoid reserved word in languages)
+	- Private/protected elements must start with "_"
 	- Use CamelCase, no accent
+	- Classes starting with upper character, variables starting with lower character, Methods starting with LowerCase
+	- A method should not exceed 40 code lines
+	- An object (except rule or Controller) should not have more than 20 public Methods
+	- Public properties must be accessed by getter/setter

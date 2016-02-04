@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SecretOfGaia_Test
 {
     [TestClass]
-    public class UnitTest1
+    public class Plateau_Test
     {
         [TestMethod]
         public void TestMethod1()

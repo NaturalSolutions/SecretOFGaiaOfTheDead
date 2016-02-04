@@ -8,34 +8,24 @@ namespace SecretOfGaia
     /// <summary>
     /// 
     /// </summary>
-    public class Deck:InventaireDeCarte
+    class Plateau
     {
 
 
         #region "Propriétés privées"
-        protected string _nom;
+
         #endregion
 
 
         #region "Proprités publiques"
-        public int valeurDeck { 
-            get {
-                return this._cartes.Select(s => s.Value.valeurCarte).Sum();
-            } 
-        }
 
-        public string nom
-        {
-            get
-            {
-                
-                return _nom;
-            }
-        }
+
         #endregion
 
         #region "Constructeurs"
-
+        public Plateau()
+        {
+        }
         #endregion
 
 
@@ -50,3 +40,9 @@ namespace SecretOfGaia
 
     }
 }
+
+
+
+
+
+
