@@ -8,7 +8,7 @@ namespace SecretOfGaia
     /// <summary>
     /// 
     /// </summary>
-    public abstract class InventaireDeCarte
+    public class InventaireDeCarte
     {
 
         #region "Propriétés privées"
@@ -18,7 +18,60 @@ namespace SecretOfGaia
 
         #region "Proprités publiques"
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual int Count
+        {
+            get
+            {
+                return _cartes.Count;
+            }
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public Dictionary<string, decimal> totalModificateurJoueur
+        {
+            get
+            {
+
+                return getTotalModificateur(false);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Dictionary<string, decimal> totalModificateurAdversaire
+        {
+            get
+            {
+
+                return getTotalModificateur(true);
+            }
+        }
+
+
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public Carte prochaineCarte
+        {
+            get
+            {
+                if (_cartes.Count == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    return this._cartes[this._cartes.Keys.Min()];
+                }
+            }
+        }
         #endregion
 
         #region "Constructeurs"
@@ -33,19 +86,41 @@ namespace SecretOfGaia
 
 
         #region "Methodes privées"
+        public Dictionary<string, decimal> getTotalModificateur(bool pourAdversaire = false)
+        {
+            Dictionary<string, decimal> curModifs = new Dictionary<string, decimal>();
+            foreach (Carte curCarte in _cartes.Values)
+            {
+                Dictionary<string, decimal> boni ;
+                if (pourAdversaire)
+                {
+                    boni = curCarte.modificateurJoueur;
+                }
+                else
+                {
+                    boni = curCarte.modificateurAdversaire;
+                }
+                foreach (string nomModif in boni.Keys)
+                {
+                    if (curModifs.ContainsKey(nomModif))
+                    {
+                        curModifs[nomModif] = curModifs[nomModif] + boni[nomModif];
+                    }
+                    else
+                    {
+                        curModifs[nomModif] = boni[nomModif];
+                    }
+                }
 
+            }
+            return curModifs;
+        }
         #endregion
 
 
         #region "Méthode publiques"
 
-        public int Count
-        {
-            get
-            {
-                return _cartes.Count;
-            }
-        }
+       
 
         /// <summary>
         /// 
@@ -71,23 +146,7 @@ namespace SecretOfGaia
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Carte prochaineCarte
-        {
-            get
-            {
-                if (_cartes.Count == 0)
-                {
-                    return null;
-                }
-                else
-                {
-                    return this._cartes[this._cartes.Keys.Min()];
-                }
-            }
-        }
+        
 
         public virtual bool ajouterCarte(Carte curcarte)
         {
@@ -112,7 +171,7 @@ namespace SecretOfGaia
                     return false;
                 }
             }
-            _cartes.Add(position, curcarte);
+            _cartes[position] =  curcarte;
             return true;
         }
 
@@ -130,6 +189,17 @@ namespace SecretOfGaia
             }
         }
 
+        public virtual Carte PrendreProchaineCarte()
+        {
+            // TODO Gérer le cas ou l'inventair est vide
+            Carte premiereCarte = _cartes[_cartes.Keys.Min()] ;
+            _cartes.Remove(_cartes.Keys.Min());
+            return premiereCarte;
+        }
+
+        public virtual List<Carte> ToList() {
+            return _cartes.Select(s => s.Value).ToList();
+        }
 
         #endregion
 

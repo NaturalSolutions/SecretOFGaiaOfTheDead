@@ -19,12 +19,14 @@ namespace SecretOfGaia_Test
         public void TestAjoutCarteEnTrop()
         {
             Terrain curPose = new Terrain(2);
+            Assert.AreEqual(curPose.Count, 0, "Création de Terrain NOK");
             Carte maCarte1 = new Carte("Carte1", TypeCarte.Instantanee, 1, 1, 12);
             bool AjoutOK =  curPose.ajouterCarte(maCarte1);
             Carte maCarte2 = new Carte("Carte2", TypeCarte.Instantanee, 1, 1, 7);
             AjoutOK = curPose.ajouterCarte(maCarte2);
             Assert.AreEqual(true, AjoutOK, "Ajout Carte autorise NOK sur retour ajouterCarte");
             Assert.AreEqual(2, curPose.Count, "Ajout de 2 Cartes NOK");
+            Assert.AreEqual(maCarte2, curPose[2], "Ajout 2éme carte pas à la bonne position ");
             Assert.AreEqual(maCarte1, curPose.prochaineCarte, "Prochaine Carte NOK avec 2 éléements ");
             Carte maCarte3 = new Carte("Carte3", TypeCarte.Instantanee, 1, 1, 7);
             AjoutOK = curPose.ajouterCarte(maCarte3);

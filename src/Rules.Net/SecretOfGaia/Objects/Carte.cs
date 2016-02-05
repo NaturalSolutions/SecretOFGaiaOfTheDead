@@ -54,6 +54,11 @@ namespace SecretOfGaia
         /// Valeur Naturelle de la carte 
         /// </summary>
         protected int _valeurCarte;
+
+
+        protected Dictionary<string, decimal> _modificateurJoueur;
+        protected Dictionary<string, decimal> _modificateurAdversaire;
+
         #endregion
 
 
@@ -110,6 +115,24 @@ namespace SecretOfGaia
                 return _valeurCarte;
             }
         }
+
+        public Dictionary<string, decimal> modificateurJoueur
+        {
+            get
+            {
+                return _modificateurJoueur;
+            }
+        }
+
+        public Dictionary<string, decimal> modificateurAdversaire
+        {
+            get
+            {
+                return _modificateurAdversaire;
+            }
+        }
+
+
         #endregion
 
         #region "Constructeurs"
@@ -117,12 +140,12 @@ namespace SecretOfGaia
         /// <summary>
         /// 
         /// </summary>
-        public Carte(string curNom,TypeCarte curTypeCarte, int curAttaque,int curSoin,int curAction , int curValeur=-1)
+        public Carte(string curNom, TypeCarte curTypeCarte, int curAttaque, int curSoin, int curAction, int curValeur = -1, Dictionary<string, decimal> curmodificateurJoueur = null, Dictionary<string, decimal> curmodificateurAdversaire = null)
         {
             this._nom = curNom;
-            this._typeCarte = curTypeCarte ;
-            this._attaque = curAttaque ;
-            this._soin = curSoin ;
+            this._typeCarte = curTypeCarte;
+            this._attaque = curAttaque;
+            this._soin = curSoin;
             _action = curAction;
             if (curValeur == -1)
             {
@@ -132,7 +155,31 @@ namespace SecretOfGaia
             {
                 _valeurCarte = curValeur;
             }
-            
+            if (curmodificateurJoueur == null)
+            {
+                _modificateurJoueur = new Dictionary<string, decimal>();
+
+            }
+            else
+            {
+                _modificateurJoueur = curmodificateurJoueur;
+            }
+            if (curmodificateurAdversaire == null)
+            {
+                _modificateurAdversaire = new Dictionary<string, decimal>();
+
+            }
+            else
+            {
+                _modificateurAdversaire = curmodificateurAdversaire;
+            }
+
+
+
+
+
+
+
         }
         #endregion
 

@@ -40,6 +40,18 @@ namespace SecretOfGaia
         /// <summary>
         /// 
         /// </summary>
+        public override int Count
+        {
+            get
+            {
+                return _cartes.Where(s => s.Value != null).Count();
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         public int CountTotal
         {
             get
@@ -66,9 +78,16 @@ namespace SecretOfGaia
 
         #region "Constructeurs"
         public Terrain(int curTaille)
+            : base()
         {
+
             _taille = curTaille;
             _cartesSupreposées = new Dictionary<int, List<Carte>>();
+            for (int i = 1; i <= curTaille; i++)
+            {
+                _cartes[i] = null;
+            }
+
         }
         #endregion
 
@@ -100,16 +119,27 @@ namespace SecretOfGaia
 
 
         #region "Méthode publiques"
+
+        public List<int> positionsLibres
+        {
+            get
+            {
+                return _cartes.Where(s => s.Value == null).Select(s => s.Key).ToList();
+            }
+        }
+
         public override bool ajouterCarte(Carte curCarte)
         {
-            if (_cartes.Count >= taille)
+
+            // TODO prendre la première position libre
+            if (positionsLibres.Count == 0)
             {
                 return false;
             }
-            else
-            {
-                return base.ajouterCarte(curCarte);
-            }
+            int positionLibre = positionsLibres.First();
+            _cartes[positionLibre] = curCarte;
+            return true;
+
         }
 
         /// <summary>
@@ -129,7 +159,7 @@ namespace SecretOfGaia
         /// <param name="position"></param>
         /// <param name="isCarteduDessous"></param>
         /// <returns></returns>
-        public bool enleverCarte(int position, bool isCarteduDessous )
+        public bool enleverCarte(int position, bool isCarteduDessous)
         {
             if (_cartes.ContainsKey(position))
             {

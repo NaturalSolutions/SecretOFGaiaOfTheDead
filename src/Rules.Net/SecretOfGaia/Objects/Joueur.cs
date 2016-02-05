@@ -14,10 +14,14 @@ namespace SecretOfGaia
         /// <summary>
         /// 
         /// </summary>
-        protected Dictionary<string, CaracteristiqueJoueur> Caracs { get; set; }
+        protected Dictionary<string, CaracteristiqueJoueur> _caracs { get; set; }
 
-        
-        
+        protected string _nom;
+
+        protected List<Deck> _decks ;
+
+        protected InventaireDeCarte _cartesEnMain;
+
         #endregion
 
         #region "Proprités publiques"
@@ -26,11 +30,36 @@ namespace SecretOfGaia
         /// </summary>
         /// <param name="NomCarac"></param>
         /// <returns></returns>
-        public decimal this[string NomCarac]
+        public decimal this[string nomCarac]
         {
             get
             {
-                return Caracs[NomCarac].ValeurCourante;
+                return _caracs[nomCarac].valeurCourante;
+            }
+        }
+
+        public string nom
+        {
+            get
+            {
+                return _nom;
+            }
+        }
+
+        public int tailleTerrain
+        {
+            get
+            {
+                // Prévoir un calcul de la mort
+                return 6;
+            }
+        }
+
+        public Deck deckActif
+        {
+            get
+            {
+                return _decks[0] ;
             }
         }
         #endregion
@@ -42,6 +71,7 @@ namespace SecretOfGaia
         /// </summary>
         public Joueur()
         {
+            _cartesEnMain = new InventaireDeCarte();
         }
         #endregion
 
@@ -51,7 +81,20 @@ namespace SecretOfGaia
 
 
         #region "Méthode publiques"
+        public Carte piocherCartes(int nbCarte = 1)
+        {
+            Carte cartePiochee = null;
+            for (int i = 0; i < nbCarte; i++)
+            {
+                cartePiochee = deckActif.PrendreProchaineCarte();
+                _cartesEnMain.ajouterCarte(cartePiochee);
+            }
+            return cartePiochee;
+        }
 
+        public void appliquerModificateur(Dictionary<string, decimal> modificateurs)
+        {
+        }
         #endregion
 
     }

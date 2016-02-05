@@ -14,11 +14,11 @@ namespace SecretOfGaia
         /// <summary>
         /// 
         /// </summary>
-        protected decimal _ValeurMax ;
+        protected decimal _valeurMax ;
         /// <summary>
         /// 
         /// </summary>
-        protected decimal _ValeurCourante ;
+        protected decimal _valeurCourante ;
         #endregion
 
 
@@ -26,16 +26,16 @@ namespace SecretOfGaia
         /// <summary>
         /// 
         /// </summary>
-        public decimal ValeurMax
+        public decimal valeurMax
         {
-            get { return this._ValeurMax; }
+            get { return this._valeurMax; }
         }
         /// <summary>
         /// 
         /// </summary>
-        public decimal ValeurCourante
+        public decimal valeurCourante
         {
-            get { return this._ValeurCourante; }
+            get { return this._valeurCourante; }
         }
         
         #endregion
