@@ -98,20 +98,22 @@ namespace SecretOfGaia
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        protected bool enleverCarteSuperposée(int position)
+        protected Carte enleverCarteSuperposée(int position)
         {
+            Carte retour;
             if (_cartesSupreposées.ContainsKey(position))
             {
+                retour = _cartesSupreposées[position].Last();
                 _cartesSupreposées[position].RemoveAt(_cartesSupreposées[position].Count - 1);
                 if (_cartesSupreposées[position].Count == 0)
                 {
                     _cartesSupreposées.Remove(position);
                 }
-                return true;
+                return retour;
             }
             else
             {
-                return false;
+                return null;
             }
         }
 
@@ -147,7 +149,7 @@ namespace SecretOfGaia
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public override bool enleverCarte(int position)
+        public override Carte enleverCarte(int position)
         {
             return enleverCarte(position, false);
         }
@@ -159,7 +161,7 @@ namespace SecretOfGaia
         /// <param name="position"></param>
         /// <param name="isCarteduDessous"></param>
         /// <returns></returns>
-        public bool enleverCarte(int position, bool isCarteduDessous)
+        public Carte enleverCarte(int position, bool isCarteduDessous)
         {
             if (_cartes.ContainsKey(position))
             {
@@ -183,7 +185,7 @@ namespace SecretOfGaia
             }
             else
             {
-                return false;
+                return null ;
             }
         }
 

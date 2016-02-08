@@ -14,11 +14,11 @@ namespace SecretOfGaia
         /// <summary>
         /// 
         /// </summary>
-        protected decimal _valeurMax ;
+        protected decimal _valeurMax;
         /// <summary>
         /// 
         /// </summary>
-        protected decimal _valeurCourante ;
+        protected decimal _valeurCourante;
         #endregion
 
 
@@ -37,15 +37,17 @@ namespace SecretOfGaia
         {
             get { return this._valeurCourante; }
         }
-        
+
         #endregion
 
         #region "constructeur"
         /// <summary>
         /// 
         /// </summary>
-        public CaracteristiqueJoueur()
+        public CaracteristiqueJoueur(decimal curValeurMax = 0)
         {
+            _valeurMax = curValeurMax;
+            _valeurCourante = curValeurMax;
         }
         #endregion
 
@@ -56,7 +58,36 @@ namespace SecretOfGaia
 
 
         #region "Méthode publiques"
+        public decimal appliquerModification(decimal modificateur, bool surValeurMax = false, bool valeurRelative = true)
+        {
+            if (!surValeurMax)
+            {
+                if (valeurRelative)
+                {
+                    this._valeurCourante += modificateur;
+                }
+                else
+                {
+                    this._valeurCourante = modificateur;
+                }
+            }
+            else
+            {
 
+                if (valeurRelative)
+                {
+                    this._valeurMax += modificateur;
+                    this._valeurCourante += modificateur;
+                }
+                else
+                {
+                    this._valeurMax = modificateur;
+                    this._valeurCourante = modificateur;
+                }
+
+            }
+            return this._valeurCourante;
+        }
         #endregion
 
     }

@@ -12,7 +12,7 @@ namespace SecretOfGaia
     {
 
         #region "Propriétés privées"
-        protected Dictionary<int,Carte> _cartes;
+        protected Dictionary<int, Carte> _cartes;
         #endregion
 
 
@@ -54,7 +54,7 @@ namespace SecretOfGaia
         }
 
 
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -89,9 +89,9 @@ namespace SecretOfGaia
         public Dictionary<string, decimal> getTotalModificateur(bool pourAdversaire = false)
         {
             Dictionary<string, decimal> curModifs = new Dictionary<string, decimal>();
-            foreach (Carte curCarte in _cartes.Values)
+            foreach (Carte curCarte in _cartes.Values.Where(s => s != null && s.TypeCarte == TypeCarte.Permanente))
             {
-                Dictionary<string, decimal> boni ;
+                Dictionary<string, decimal> boni;
                 if (pourAdversaire)
                 {
                     boni = curCarte.modificateurJoueur;
@@ -120,16 +120,18 @@ namespace SecretOfGaia
 
         #region "Méthode publiques"
 
-       
+
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="NumCarte"></param>
         /// <returns></returns>
-        public virtual Carte this[int position] {
-            get {
-                return _cartes[position] ;
+        public virtual Carte this[int position]
+        {
+            get
+            {
+                return _cartes[position];
             }
         }
 
@@ -142,11 +144,11 @@ namespace SecretOfGaia
         {
             get
             {
-                return _cartes.Select(s=>s.Value).Where(s=>s.nom.ToLower() == NomCarte.ToLower()).FirstOrDefault() ;
+                return _cartes.Select(s => s.Value).Where(s => s.nom.ToLower() == NomCarte.ToLower()).FirstOrDefault();
             }
         }
 
-        
+
 
         public virtual bool ajouterCarte(Carte curcarte)
         {
@@ -154,11 +156,11 @@ namespace SecretOfGaia
             return true;
         }
 
-        public virtual bool ajouterCarte(Carte curcarte,int position = - 1,bool remplaceExistante = true)
+        public virtual bool ajouterCarte(Carte curcarte, int position = - 1, bool remplaceExistante = true)
         {
             if (position == -1)
             {
-                position = _cartes.Keys.DefaultIfEmpty(0).Max() + 1 ;
+                position = _cartes.Keys.DefaultIfEmpty(0).Max() + 1;
             }
             if (_cartes.ContainsKey(position))
             {
@@ -171,36 +173,79 @@ namespace SecretOfGaia
                     return false;
                 }
             }
-            _cartes[position] =  curcarte;
+            _cartes[position] = curcarte;
             return true;
         }
 
 
-        public virtual bool enleverCarte(int position)
+        public virtual Carte enleverCarte(int position)
         {
+            Carte Resultat;
             if (_cartes.ContainsKey(position))
             {
+                Resultat = _cartes[position];
                 _cartes.Remove(position);
-                return true;
+                return Resultat;
             }
             else
             {
-                return false;
+                return null;
             }
         }
+
+
+        public virtual Carte enleverCarte(Carte curCarte)
+        {
+            int positonCarte = _cartes.Where(s => s.Value == curCarte).Select(s => s.Key).FirstOrDefault();
+            if (positonCarte == null)
+            {
+                return null;
+            }
+            else
+            {
+
+                _cartes.Remove(positonCarte);
+                return curCarte;
+            }
+        }
+
 
         public virtual Carte PrendreProchaineCarte()
         {
             // TODO Gérer le cas ou l'inventair est vide
-            Carte premiereCarte = _cartes[_cartes.Keys.Min()] ;
+            Carte premiereCarte = _cartes[_cartes.Keys.Min()];
             _cartes.Remove(_cartes.Keys.Min());
             return premiereCarte;
         }
 
-        public virtual List<Carte> ToList() {
+        public virtual Carte PrendreUneCarte(Carte curCarte)
+        {
+
+            return enleverCarte(curCarte); ;
+        }
+
+
+        public virtual List<Carte> ToList()
+        {
             return _cartes.Select(s => s.Value).ToList();
         }
 
+
+        public virtual void battreLesCartes()
+        {
+            Dictionary<int, Carte> nouvellesCartes = new Dictionary<int, Carte>();
+            Random rnd = new Random();
+            int nouvellePosition = 1;
+            while (_cartes.Count > 0)
+            {
+                int positionChoisie = rnd.Next(0, _cartes.Keys.Count - 1);
+                int position = _cartes.Keys.ToList()[positionChoisie];
+                nouvellesCartes.Add(nouvellePosition, _cartes[position]);
+                _cartes.Remove(position);
+                nouvellePosition++;
+            }
+            _cartes = nouvellesCartes;
+        }
         #endregion
 
     }

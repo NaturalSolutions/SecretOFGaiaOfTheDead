@@ -11,7 +11,7 @@ namespace SecretOfGaia
     public enum TypeCarte
     {
         Instantanee = 1,
-        Permenanete = 2,
+        Permanente = 2,
         Retarde = 4
     }
 

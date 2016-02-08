@@ -18,7 +18,7 @@ namespace SecretOfGaia
 
         protected string _nom;
 
-        protected List<Deck> _decks ;
+        protected List<Deck> _decks;
 
         protected InventaireDeCarte _cartesEnMain;
 
@@ -59,7 +59,40 @@ namespace SecretOfGaia
         {
             get
             {
-                return _decks[0] ;
+                return _decks[0];
+            }
+        }
+
+        public Dictionary<string, CaracteristiqueJoueur> caracs
+        {
+            get
+            {
+                return (from x in _caracs
+                        select x).ToDictionary(x => x.Key, x => x.Value);
+            }
+        }
+        public List<Deck> decks
+        {
+            get
+            {
+                return _decks.ToList();
+            }
+        }
+
+        public InventaireDeCarte cartesEnMain
+        {
+            get
+            {
+                return _cartesEnMain;
+            }
+        }
+
+
+        public Dictionary<string, decimal> caracMax
+        {
+            get
+            {
+                return _caracs.ToDictionary(s => s.Key, s => s.Value.valeurMax, StringComparer.CurrentCultureIgnoreCase);
             }
         }
         #endregion
@@ -69,9 +102,21 @@ namespace SecretOfGaia
         /// <summary>
         /// 
         /// </summary>
-        public Joueur()
+        public Joueur(string curNom, List<Deck> curDecks = null, Dictionary<string, CaracteristiqueJoueur> curCaracs = null)
         {
             _cartesEnMain = new InventaireDeCarte();
+            _nom = curNom;
+            _decks = curDecks;
+            if (_decks == null)
+            {
+                _decks = new List<Deck>();
+            }
+            _caracs = new Dictionary<string, CaracteristiqueJoueur>(StringComparer.CurrentCultureIgnoreCase);
+            if (curCaracs != null)
+            {
+                curCaracs.Keys.ToList().ForEach(s => _caracs.Add(s, curCaracs[s]));
+            }
+
         }
         #endregion
 
@@ -92,8 +137,17 @@ namespace SecretOfGaia
             return cartePiochee;
         }
 
-        public void appliquerModificateur(Dictionary<string, decimal> modificateurs)
+        public void appliquerModificateur(Dictionary<string, decimal> modificateurs, bool surValeurMax = false, bool valeurRelative = true)
         {
+
+            foreach (string carac in modificateurs.Keys)
+            {
+                if (!_caracs.ContainsKey(carac))
+                {
+                    _caracs[carac] = new CaracteristiqueJoueur();
+                }
+                _caracs[carac].appliquerModification(modificateurs[carac],surValeurMax,valeurRelative);
+            }
         }
         #endregion
 
