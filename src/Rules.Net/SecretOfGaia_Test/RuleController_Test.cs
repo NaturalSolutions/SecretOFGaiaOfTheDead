@@ -19,6 +19,11 @@ namespace SecretOfGaia_Test
                     return new Carte("Mante religieuse", TypeCarte.Instantanee, 3, 0, 2);
                 case "Goéland leucophée":
                     return new Carte("Goéland leucophée", TypeCarte.Instantanee, 4, 0, 2);
+                case "Immortelle des dunes":
+                    Dictionary<string, decimal> modifJoueur = new Dictionary<string, decimal>{
+                        {"PV",1},
+                    };
+                    return new Carte("Immortelle des dunes", TypeCarte.Permanente, 4, 0,4,curmodificateurJoueur:modifJoueur);
                 default:
                     return new Carte("Guêpe", TypeCarte.Instantanee, 5, 0, 4);
             }
@@ -119,6 +124,26 @@ namespace SecretOfGaia_Test
             Assert.AreEqual(actionAvantCarte, MonControlleur.joueur1["actions"], "Nb action après jouer une carte NOK");
             Assert.AreEqual(5, MonControlleur.joueur1.cartesEnMain.Count, "Nb cartes en mains joueur 1 après jouer une carte NOk");
             Assert.AreEqual(PVJoueur2,MonControlleur.joueur2["PV"], "PV joueur 2  après jouer une carte NOk");
+        }
+
+
+
+        [TestMethod]
+        public void TestDebutTourCartePermSoin()
+        {
+            RuleController MonControlleur = new RuleController();
+            MonControlleur.demarerDuel(obtenirJoueur1(), obtenirJoueur2());
+            decimal actionAvantCarte = MonControlleur.joueur1["actions"];
+            decimal PVJoueur2 = MonControlleur.joueur2["PV"];
+            MonControlleur.joueur1.cartesEnMain.ajouterCarte(getCarte("Mante religieuse"));
+            Assert.AreEqual(5, MonControlleur.joueur1.cartesEnMain.Count, "Nb cartes en mains joueur 1 NOk");
+            Carte carteJouee = MonControlleur.jouerUneCarteDepuisLaMain("Mante religieuse");
+            Assert.AreEqual(PVJoueur2-carteJouee.attaque, MonControlleur.joueur2["PV"], "PV joueur 2  après jouer une carte NOk");
+            MonControlleur.plateau.terrainsJoueur2.ajouterCarte(getCarte("Immortelle des dunes"));
+            MonControlleur.finTourJoueur1();
+            Assert.AreEqual(PVJoueur2 - carteJouee.attaque+1, MonControlleur.joueur2["PV"], "PV après immortelle des dunes NOK");
+
+            
         }
 
 

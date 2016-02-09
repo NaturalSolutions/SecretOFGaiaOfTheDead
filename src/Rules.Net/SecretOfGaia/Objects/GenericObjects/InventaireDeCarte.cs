@@ -94,11 +94,12 @@ namespace SecretOfGaia
                 Dictionary<string, decimal> boni;
                 if (pourAdversaire)
                 {
-                    boni = curCarte.modificateurJoueur;
+                    boni = curCarte.modificateurAdversaire;
+                    
                 }
                 else
                 {
-                    boni = curCarte.modificateurAdversaire;
+                    boni = curCarte.modificateurJoueur;
                 }
                 foreach (string nomModif in boni.Keys)
                 {

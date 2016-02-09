@@ -72,6 +72,14 @@ namespace SecretOfGaia
             }
         }
 
+
+        public Plateau plateau
+        {
+            get
+            {
+                return _plateau;
+            }
+        }
         public Joueur joueur1
         {
             get
@@ -131,7 +139,7 @@ namespace SecretOfGaia
             joueurActif.appliquerModificateur(new Dictionary<string, decimal>
             {
                 {"actions",this.nbAction }
-            });
+            },surValeurMax:true);
             
 
         }

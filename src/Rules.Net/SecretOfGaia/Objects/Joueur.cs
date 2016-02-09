@@ -15,7 +15,7 @@ namespace SecretOfGaia
         /// 
         /// </summary>
         protected Dictionary<string, CaracteristiqueJoueur> _caracs { get; set; }
-
+        
         protected string _nom;
 
         protected List<Deck> _decks;
@@ -145,8 +145,12 @@ namespace SecretOfGaia
                 if (!_caracs.ContainsKey(carac))
                 {
                     _caracs[carac] = new CaracteristiqueJoueur();
+                    _caracs[carac].appliquerModification(modificateurs[carac], surValeurMax: true, valeurRelative: valeurRelative);
                 }
-                _caracs[carac].appliquerModification(modificateurs[carac],surValeurMax,valeurRelative);
+                else
+                {
+                    _caracs[carac].appliquerModification(modificateurs[carac], surValeurMax, valeurRelative);
+                }
             }
         }
         #endregion

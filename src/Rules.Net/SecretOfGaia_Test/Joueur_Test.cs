@@ -44,13 +44,13 @@ namespace SecretOfGaia_Test
             Assert.AreEqual(15, MonJoueur["PV"], " COnstructeur Valeur force NOK");
 
             Dictionary<string, decimal> modif = new Dictionary<string, decimal> {
-                {"Force",5}
+                {"Force",2}
                 ,{"PV",-5}
             };
 
             MonJoueur.appliquerModificateur(modif);
 
-            Assert.AreEqual(10, MonJoueur["force"], " modif force NOK");
+            Assert.AreEqual(5, MonJoueur["force"], " modif force NOK");
             Assert.AreEqual(10, MonJoueur["PV"], " modif PV NOK");
 
             Assert.AreEqual(5, MonJoueur.caracMax["force"], " modif force valeur Max NOK");
@@ -73,13 +73,13 @@ namespace SecretOfGaia_Test
 
             Dictionary<string, decimal> modif = new Dictionary<string, decimal> {
                 {"Force",3}
-                ,{"PV",65}
+                ,{"PV",8}
             };
 
             MonJoueur.appliquerModificateur(modif,valeurRelative:false);
 
             Assert.AreEqual(3, MonJoueur["force"], " modif force NOK");
-            Assert.AreEqual(65, MonJoueur["PV"], " modif PV NOK");
+            Assert.AreEqual(8, MonJoueur["PV"], " modif PV NOK");
 
             Assert.AreEqual(5, MonJoueur.caracMax["force"], " modif force valeur Max NOK");
             Assert.AreEqual(15, MonJoueur.caracMax["PV"], " modif PV NOK valeur Max NOK");

@@ -64,11 +64,11 @@ namespace SecretOfGaia
             {
                 if (valeurRelative)
                 {
-                    this._valeurCourante += modificateur;
+                    this._valeurCourante = Math.Min(this._valeurCourante + modificateur, this._valeurMax);
                 }
                 else
                 {
-                    this._valeurCourante = modificateur;
+                    this._valeurCourante = Math.Min(modificateur, this._valeurMax);
                 }
             }
             else
