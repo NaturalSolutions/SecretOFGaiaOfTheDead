@@ -24,6 +24,8 @@ namespace SecretOfGaia_Test
                         {"PV",1},
                     };
                     return new Carte("Immortelle des dunes", TypeCarte.Permanente, 4, 0,4,curmodificateurJoueur:modifJoueur);
+                case "Figuier de Barbarie":
+                    return new Carte("Figuier de Barbarie", TypeCarte.Retarde,0, 3, 3);
                 default:
                     return new Carte("Guêpe", TypeCarte.Instantanee, 5, 0, 4);
             }
@@ -90,6 +92,23 @@ namespace SecretOfGaia_Test
 
         }
 
+
+
+        [TestMethod]
+        public void TestFinTour()
+        {
+            RuleController MonControlleur = new RuleController();
+            MonControlleur.demarerDuel(obtenirJoueur1(), obtenirJoueur2());
+            MonControlleur.finTourJoueur1();
+            MonControlleur.finTourJoueur2();
+            Assert.AreEqual(2, MonControlleur.numTour, "Num tour NOK");
+            Assert.AreEqual(4, MonControlleur.nbAction, "NbAction tour NOK");
+            Assert.AreEqual(5, MonControlleur.joueur1.cartesEnMain.Count, "Nb cartes en mains joueur 1 NOk");
+            Assert.AreEqual(5, MonControlleur.joueur2.cartesEnMain.Count, "Nb cartes en mains joueur 2 NOk");
+
+        }
+
+
         [TestMethod]
         public void TestJouerCartePossible()
         {
@@ -147,64 +166,20 @@ namespace SecretOfGaia_Test
         }
 
 
-        /*
         [TestMethod]
-        public void TestAjoutCarteEnTrop()
+        public void TestCarteRetardée()
         {
-            Terrain curPose = new Terrain(2);
-            Assert.AreEqual(curPose.Count, 0, "Création de Terrain NOK");
-            Carte maCarte1 = new Carte("Carte1", TypeCarte.Instantanee, 1, 1, 12);
-            bool AjoutOK =  curPose.ajouterCarte(maCarte1);
-            Carte maCarte2 = new Carte("Carte2", TypeCarte.Instantanee, 1, 1, 7);
-            AjoutOK = curPose.ajouterCarte(maCarte2);
-            Assert.AreEqual(true, AjoutOK, "Ajout Carte autorise NOK sur retour ajouterCarte");
-            Assert.AreEqual(2, curPose.Count, "Ajout de 2 Cartes NOK");
-            Assert.AreEqual(maCarte2, curPose[2], "Ajout 2éme carte pas à la bonne position ");
-            Assert.AreEqual(maCarte1, curPose.prochaineCarte, "Prochaine Carte NOK avec 2 éléements ");
-            Carte maCarte3 = new Carte("Carte3", TypeCarte.Instantanee, 1, 1, 7);
-            AjoutOK = curPose.ajouterCarte(maCarte3);
-            Assert.AreEqual(false, AjoutOK, "Ajout Carte Interdite NOK sur retour ajouterCarte");
-            Assert.AreEqual(2, curPose.Count, "Ajout de 2 Cartes NOK sur Count");
+            RuleController MonControlleur = new RuleController();
+            MonControlleur.demarerDuel(obtenirJoueur1(), obtenirJoueur2());
+            decimal actionAvantCarte = MonControlleur.joueur1["actions"];
+            int PaceLibreTerrainJoueur1 = MonControlleur.plateau.terrainsJoueur1.positionsLibres.Count;
+            MonControlleur.joueur1.cartesEnMain.ajouterCarte(getCarte("Figuier de Barbarie"));
+            Assert.AreEqual(5, MonControlleur.joueur1.cartesEnMain.Count, "Nb cartes en mains joueur 1 NOk");
+            Carte carteJouee = MonControlleur.jouerUneCarteDepuisLaMain("Figuier de Barbarie");
+            Assert.AreEqual(actionAvantCarte-3,MonControlleur.joueur1["actions"],"Nb action après carte retadrée NOK");
+            Assert.AreEqual(PaceLibreTerrainJoueur1 - 1, MonControlleur.plateau.terrainsJoueur1.positionsLibres.Count, "Nb place libre joueur 1 NOK");
 
         }
 
-        [TestMethod]
-        public void TestAjoutCarteSuperposée()
-        {
-            Terrain curPose = new Terrain(2);
-            Carte maCarte1 = new Carte("Carte1", TypeCarte.Instantanee, 1, 1, 12);
-            bool AjoutOK = curPose.ajouterCarte(maCarte1);
-            Carte maCarte2 = new Carte("Carte2", TypeCarte.Instantanee, 1, 1, 7);
-            AjoutOK = curPose.poserSur(1,maCarte2);
-            Assert.AreEqual(1, curPose.Count, "Ajout de Cartes dessus NOK");
-            Assert.AreEqual(maCarte2, curPose[1], "Ajout de Cartes dessus NOK");
-
-        }
-
-
-        [TestMethod]
-        public void TestElenverCarteSuperposée()
-        {
-            Terrain curPose = new Terrain(2);
-            Carte maCarte1 = new Carte("Carte1", TypeCarte.Instantanee, 1, 1, 12);
-            bool AjoutOK = curPose.ajouterCarte(maCarte1);
-            Carte maCarte2 = new Carte("Carte2", TypeCarte.Instantanee, 1, 1, 7);
-            AjoutOK = curPose.poserSur(1, maCarte2);
-            curPose.enleverCarte(1);
-            Assert.AreEqual(1, curPose.Count, "Enlever Carte dessus Count NOK");
-            Assert.AreEqual(maCarte1, curPose[1], "Enlever Cartes dessus Carte NOK");
-        }
-
-        [TestMethod]
-        public void TestElenverCarteduDessousAvecSuperposition()
-        {
-            Terrain curPose = new Terrain(2);
-            Carte maCarte1 = new Carte("Carte1", TypeCarte.Instantanee, 1, 1, 12);
-            bool AjoutOK = curPose.ajouterCarte(maCarte1);
-            Carte maCarte2 = new Carte("Carte2", TypeCarte.Instantanee, 1, 1, 7);
-            AjoutOK = curPose.poserSur(1, maCarte2);
-            curPose.enleverCarte(1,true);
-            Assert.AreEqual(0, curPose.Count, "Enlever Carte dessous Count NOK");
-        }*/
     }
 }

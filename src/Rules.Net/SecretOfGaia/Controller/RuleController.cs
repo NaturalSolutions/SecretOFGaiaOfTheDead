@@ -80,6 +80,21 @@ namespace SecretOfGaia
                 return _plateau;
             }
         }
+
+        public Terrain terrainJoueurActif
+        {
+            get
+            {
+                if (_joueurActif == joueur1)
+                {
+                    return plateau.terrainsJoueur1;
+                }
+                else
+                {
+                    return plateau.terrainsJoueur2;
+                }
+            }
+        }
         public Joueur joueur1
         {
             get
@@ -152,7 +167,22 @@ namespace SecretOfGaia
             demarrerUnTour();
         }
 
+        protected void AppliquerCarte(Carte curCarte)
+        {
+            joueurActif.appliquerModificateur(new Dictionary<string, decimal>{
+                {"PV",curCarte.soin},
+            });
+
+            adversaireActif.appliquerModificateur(new Dictionary<string, decimal>{
+                {"PV",-curCarte.attaque}
+            });
+
+            joueurActif.appliquerModificateur(curCarte.modificateurJoueur);
+            adversaireActif.appliquerModificateur(curCarte.modificateurAdversaire);
+        }
+
         
+
         #endregion
 
 
@@ -191,15 +221,30 @@ namespace SecretOfGaia
 
         }
 
+        public void finTourJoueur2()
+        {
+
+            //TODO gestion des actions conservées
+            _joueur2.appliquerModificateur(new Dictionary<string, decimal>
+            {
+                {"actions",0}
+            }, valeurRelative: false);
+            demarrerUnTour();
+
+        }
+
 
         public Carte jouerUneCarteDepuisLaMain(string nomCarte)
         {
             Carte curCarte = joueurActif.cartesEnMain[nomCarte] ;
-            return jouerUneCarteDepuisLaMain(curCarte);
+            
+            if (curCarte == null) return null ;
+            return jouerUneCarteDepuisLaMain(curCarte); 
+            
+            
 
             
         }
-
 
         public Carte jouerUneCarteDepuisLaMain(Carte maCarte)
         {
@@ -208,23 +253,63 @@ namespace SecretOfGaia
                 return null;
             }
             Carte curCarte = joueurActif.cartesEnMain.enleverCarte(maCarte);
-            if (curCarte == null )
+            if (curCarte == null)
             {
                 return null;
             }
 
+            if ((curCarte.TypeCarte & TypeCarte.Instantanee) == 0)
+            {
+                // Carte à ,poser du le terrain
+                if (terrainJoueurActif.positionsLibres.Count() == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    terrainJoueurActif.ajouterCarte(curCarte);
+                }
+            }
+            else
+            {
+                AppliquerCarte(curCarte);
+            }
+
             joueurActif.appliquerModificateur(new Dictionary<string, decimal>{
-                {"PV",curCarte.soin},
                 {"actions",-curCarte.action}
-            });
-            adversaireActif.appliquerModificateur(new Dictionary<string, decimal>{
-                {"PV",-curCarte.attaque}
             });
 
             return curCarte;
 
-
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nomCarte"></param>
+        /// <returns></returns>
+        public Carte jouerUneCarteDepuisLePlateau(string nomCarte)
+        {
+            Carte curCarte = terrainJoueurActif[nomCarte];
+            return jouerUneCarteDepuisLePlateau(curCarte);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="curCarte"></param>
+        /// <returns></returns>
+        public Carte jouerUneCarteDepuisLePlateau(Carte curCarte)
+        {
+            if (curCarte == null || (curCarte.TypeCarte & TypeCarte.Retarde) == 0) return null;
+            terrainJoueurActif.PrendreUneCarte(curCarte);
+            AppliquerCarte(curCarte);
+
+            return curCarte;
+        }
+
+
+        
 
         #endregion
 

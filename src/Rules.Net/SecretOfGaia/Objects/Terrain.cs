@@ -133,7 +133,7 @@ namespace SecretOfGaia
         public override bool ajouterCarte(Carte curCarte)
         {
 
-            // TODO prendre la première position libre
+            
             if (positionsLibres.Count == 0)
             {
                 return false;

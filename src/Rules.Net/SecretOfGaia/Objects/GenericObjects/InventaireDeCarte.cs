@@ -213,7 +213,8 @@ namespace SecretOfGaia
 
         public virtual Carte PrendreProchaineCarte()
         {
-            // TODO Gérer le cas ou l'inventair est vide
+            
+            if (_cartes.Count == 0) return null;
             Carte premiereCarte = _cartes[_cartes.Keys.Min()];
             _cartes.Remove(_cartes.Keys.Min());
             return premiereCarte;
